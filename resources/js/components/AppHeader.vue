@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { InertiaLinkProps } from '@inertiajs/vue3';
 import { Link, usePage } from '@inertiajs/vue3';
-import { LayoutGrid, Menu } from 'lucide-vue-next';
+import { Files, Menu } from 'lucide-vue-next';
 import { computed } from 'vue';
 
 import AppLogo from '@/components/AppLogo.vue';
@@ -30,7 +30,7 @@ import {
 import UserMenuContent from '@/components/UserMenuContent.vue';
 import { useActiveUrl } from '@/composables/useActiveUrl';
 import { getInitials } from '@/composables/useInitials';
-import { dashboard } from '@/routes';
+import { index } from '@/routes/receipts';
 import type { BreadcrumbItem, NavItem } from '@/types';
 
 interface Props {
@@ -53,9 +53,9 @@ function activeItemStyles(url: NonNullable<InertiaLinkProps['href']>) {
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
+        title: 'Your Receipts',
+        href: index(),
+        icon: Files,
     },
 ];
 </script>
@@ -109,7 +109,7 @@ const mainNavItems: NavItem[] = [
                     </Sheet>
                 </div>
 
-                <Link :href="dashboard()" class="flex items-center gap-x-2">
+                <Link :href="index()" class="flex items-center gap-x-2">
                     <AppLogo />
                 </Link>
 
