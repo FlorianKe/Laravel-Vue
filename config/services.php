@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'ocr' => [
+        'api_key' => env('OCR_API_KEY'),
+    ],
+
+    'perplexity' => [
+        'api_key' => env('PERPLEXITY_API_KEY'),
+    ],
 ];
