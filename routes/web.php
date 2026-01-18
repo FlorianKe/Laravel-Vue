@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReceiptsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -11,6 +11,8 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::resource('receipts', ReceiptsController::class)->only('index', 'store');
+});
 
 require __DIR__.'/settings.php';

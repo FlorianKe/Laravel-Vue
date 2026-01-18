@@ -39,7 +39,11 @@ export interface User {
 
 export type BreadcrumbItemType = BreadcrumbItem;
 
-export interface Quote {
-    quote: string;
-    author: string;
+export interface Receipts {
+    id: string;
+    merchant: string;
+    total: number;
+    currency: string;
+    vat: number;
+    date: Date;
 }
