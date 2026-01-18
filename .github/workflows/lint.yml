@@ -32,6 +32,9 @@ jobs:
       - name: Run Pint
         run: composer lint
 
+      - name: Run LaraStan
+        run: composer larastan
+
       - name: Format Frontend
         run: npm run format
 
