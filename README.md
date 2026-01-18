@@ -20,4 +20,5 @@ Ein einfacher Tracker, der Quittungen mittels OCR ausliest und mit einer KI in d
 
 - [ ] Bessere Fehlervalidierung implementieren
 - [ ] Tests schreiben (Unit & Feature Tests)
+- [ ] Verwendung von DTOs 
 - [ ] Speicher der Quittungen in einem Laravel storage
