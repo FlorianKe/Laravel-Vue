@@ -38,3 +38,8 @@ export interface User {
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+export interface Quote {
+    quote: string;
+    author: string;
+}
