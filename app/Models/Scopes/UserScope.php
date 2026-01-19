@@ -2,6 +2,7 @@
 
 namespace App\Models\Scopes;
 
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
@@ -10,9 +11,11 @@ class UserScope implements Scope
 {
     /**
      * Apply the scope to a given Eloquent query builder.
+     *
+     * @throws Exception
      */
     public function apply(Builder $builder, Model $model): void
     {
-        $builder->where('user_id', auth()->id());
+        $builder->where('user_id', user()->id);
     }
 }
