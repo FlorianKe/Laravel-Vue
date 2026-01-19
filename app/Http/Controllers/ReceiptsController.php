@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReceiptsRequest;
 use App\Models\Receipts;
-use App\Models\User;
 use App\Services\AiParserServices;
 use App\Services\OcrService;
-use Illuminate\Container\Attributes\CurrentUser;
-use Illuminate\Http\Client\ConnectionException;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
@@ -20,7 +18,7 @@ class ReceiptsController extends Controller
     {
         $receipts = Receipts::all();
 
-        return Inertia::render('Dashboard', [
+        return Inertia::render('receipts/index', [
             'receipts' => $receipts,
         ]);
     }
@@ -28,10 +26,9 @@ class ReceiptsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @throws ConnectionException
-     * @throws \Exception
+     * @throws Exception
      */
-    public function store(#[CurrentUser] User $user, StoreReceiptsRequest $request, AiParserServices $aiParserServices): RedirectResponse
+    public function store(StoreReceiptsRequest $request, AiParserServices $aiParserServices): RedirectResponse
     {
         try {
             $ocrText = OcrService::extractText($request->file('receipt')->getPathname());
@@ -39,12 +36,12 @@ class ReceiptsController extends Controller
             $receipt = $aiParserServices->parseReceipt($ocrText);
 
             Receipts::query()->create([
-                'user_id' => $user->id,
+                'user_id' => user()->id,
                 ...$receipt,
             ]);
         } catch (\Throwable) {
             throw ValidationException::withMessages([
-                'receipt' => 'OCR failed. Please try later again.',
+                'receipt' => 'Scan failed. Please try later again.',
             ]);
         }
 
